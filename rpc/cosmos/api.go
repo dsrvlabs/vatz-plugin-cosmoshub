@@ -14,7 +14,7 @@ const (
 // Status is response entity frmo REST.
 type Status struct {
 	Jsonrpc string `json:"jsonrpc"`
-	ID      string `json:"id"`
+	ID      int `json:"id"`
 	Result  struct {
 		NodeInfo struct {
 			ProtocolVersion struct {
