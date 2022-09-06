@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"time"
 
-	rpcCosmos "github.com/dsrvlabs/vatz-plugin-common/rpc/cosmos"
+	rpcCosmos "github.com/dsrvlabs/vatz-plugin-cosmoshub/rpc/cosmos"
 	"github.com/rs/zerolog/log"
 )
 

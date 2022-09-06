@@ -3,10 +3,10 @@
 package mocks
 
 import (
-	common "github.com/dsrvlabs/vatz-plugin-common/rpc/cosmos"
+	rpcCosmos "github.com/dsrvlabs/vatz-plugin-cosmoshub/rpc/cosmos"
 	mock "github.com/stretchr/testify/mock"
 
-	policy "github.com/dsrvlabs/vatz-plugin-common/plugins/cosmos-sdk-blocksync/policy"
+	policy "github.com/dsrvlabs/vatz-plugin-cosmoshub/plugins/cosmos-sdk-blocksync/policy"
 
 	time "time"
 )
@@ -17,18 +17,18 @@ type Estimator struct {
 }
 
 // Estimate provides a mock function with given fields: history, timeWindow, maxBlockInterval
-func (_m *Estimator) Estimate(history []*common.Status, timeWindow time.Duration, maxBlockInterval time.Duration) (policy.AlertStatus, error) {
+func (_m *Estimator) Estimate(history []*rpcCosmos.Status, timeWindow time.Duration, maxBlockInterval time.Duration) (policy.AlertStatus, error) {
 	ret := _m.Called(history, timeWindow, maxBlockInterval)
 
 	var r0 policy.AlertStatus
-	if rf, ok := ret.Get(0).(func([]*common.Status, time.Duration, time.Duration) policy.AlertStatus); ok {
+	if rf, ok := ret.Get(0).(func([]*rpcCosmos.Status, time.Duration, time.Duration) policy.AlertStatus); ok {
 		r0 = rf(history, timeWindow, maxBlockInterval)
 	} else {
 		r0 = ret.Get(0).(policy.AlertStatus)
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func([]*common.Status, time.Duration, time.Duration) error); ok {
+	if rf, ok := ret.Get(1).(func([]*rpcCosmos.Status, time.Duration, time.Duration) error); ok {
 		r1 = rf(history, timeWindow, maxBlockInterval)
 	} else {
 		r1 = ret.Error(1)

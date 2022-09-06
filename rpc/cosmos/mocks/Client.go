@@ -3,7 +3,7 @@
 package mocks
 
 import (
-	common "github.com/dsrvlabs/vatz-plugin-common/rpc/cosmos"
+	rpcCosmos "github.com/dsrvlabs/vatz-plugin-cosmoshub/rpc/cosmos"
 	mock "github.com/stretchr/testify/mock"
 )
 
@@ -13,15 +13,15 @@ type Client struct {
 }
 
 // GetStatus provides a mock function with given fields:
-func (_m *Client) GetStatus() (*common.Status, error) {
+func (_m *Client) GetStatus() (*rpcCosmos.Status, error) {
 	ret := _m.Called()
 
-	var r0 *common.Status
-	if rf, ok := ret.Get(0).(func() *common.Status); ok {
+	var r0 *rpcCosmos.Status
+	if rf, ok := ret.Get(0).(func() *rpcCosmos.Status); ok {
 		r0 = rf()
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(*common.Status)
+			r0 = ret.Get(0).(*rpcCosmos.Status)
 		}
 	}
 

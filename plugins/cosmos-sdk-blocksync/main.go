@@ -11,8 +11,8 @@ import (
 	"golang.org/x/net/context"
 	"google.golang.org/protobuf/types/known/structpb"
 
-	"github.com/dsrvlabs/vatz-plugin-common/plugins/cosmos-sdk-blocksync/policy"
-	"github.com/dsrvlabs/vatz-plugin-common/plugins/cosmos-sdk-blocksync/status"
+	"github.com/dsrvlabs/vatz-plugin-cosmoshub/plugins/cosmos-sdk-blocksync/policy"
+	"github.com/dsrvlabs/vatz-plugin-cosmoshub/plugins/cosmos-sdk-blocksync/status"
 )
 
 const (

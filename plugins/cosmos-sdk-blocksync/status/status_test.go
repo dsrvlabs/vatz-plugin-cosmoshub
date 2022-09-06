@@ -7,8 +7,8 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	rpcCosmos "github.com/dsrvlabs/vatz-plugin-common/rpc/cosmos"
-	"github.com/dsrvlabs/vatz-plugin-common/rpc/cosmos/mocks"
+	rpcCosmos "github.com/dsrvlabs/vatz-plugin-cosmoshub/rpc/cosmos"
+	"github.com/dsrvlabs/vatz-plugin-cosmoshub/rpc/cosmos/mocks"
 )
 
 func init() {

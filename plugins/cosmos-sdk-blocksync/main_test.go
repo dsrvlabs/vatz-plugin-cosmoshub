@@ -6,9 +6,9 @@ import (
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/protobuf/types/known/structpb"
 
-	"github.com/dsrvlabs/vatz-plugin-common/plugins/cosmos-sdk-blocksync/mocks"
-	"github.com/dsrvlabs/vatz-plugin-common/plugins/cosmos-sdk-blocksync/policy"
-	rpcCosmos "github.com/dsrvlabs/vatz-plugin-common/rpc/cosmos"
+	"github.com/dsrvlabs/vatz-plugin-cosmoshub/plugins/cosmos-sdk-blocksync/mocks"
+	"github.com/dsrvlabs/vatz-plugin-cosmoshub/plugins/cosmos-sdk-blocksync/policy"
+	rpcCosmos "github.com/dsrvlabs/vatz-plugin-cosmoshub/rpc/cosmos"
 	pluginpb "github.com/dsrvlabs/vatz-proto/plugin/v1"
 )
 

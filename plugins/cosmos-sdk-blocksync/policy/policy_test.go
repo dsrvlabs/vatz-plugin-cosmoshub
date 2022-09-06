@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	rpcCosmos "github.com/dsrvlabs/vatz-plugin-common/rpc/cosmos"
+	rpcCosmos "github.com/dsrvlabs/vatz-plugin-cosmoshub/rpc/cosmos"
 	"github.com/stretchr/testify/assert"
 )
 
