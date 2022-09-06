@@ -16,7 +16,7 @@ import (
 
 const (
         addr = "0.0.0.0"
-        port = 9094
+        port = 9098
 )
 
 func main() {
@@ -33,7 +33,7 @@ func pluginFeature(info, option map[string]*structpb.Value) (sdk.CallResponse, e
 	state := pluginpb.STATE_NONE
 	severity := pluginpb.SEVERITY_INFO
 
-	c := exec.Command("bash", "-c", "ps -e | grep seid | grep -v grep | wc -l")
+	c := exec.Command("bash", "-c", "ps -e | grep gaiad | grep -v grep | wc -l")
 	var out bytes.Buffer
 	c.Stdout = &out
 	c.Run()
@@ -45,17 +45,17 @@ func pluginFeature(info, option map[string]*structpb.Value) (sdk.CallResponse, e
 
 	contentMSG := ""
 	if result > 0 {
-		log.Info().Str("process", "up").Msg(fmt.Sprintf("sei Process alive"))
-		contentMSG = "sei Process is UP"
+		log.Info().Str("process", "up").Msg(fmt.Sprintf("gaiad Process alive"))
+		contentMSG = "gaiad Process is UP"
 		state = pluginpb.STATE_SUCCESS
 	} else {
-		log.Info().Str("process", "up").Msg(fmt.Sprintf("sei Process died"))
-		contentMSG = "sei Process is DOWN"
+		log.Info().Str("process", "up").Msg(fmt.Sprintf("gaiad Process died"))
+		contentMSG = "gaiad Process is DOWN"
 		severity = pluginpb.SEVERITY_CRITICAL
 	}
 
 	ret := sdk.CallResponse{
-		FuncName:   "seiUP",
+		FuncName:   "gaiadUP",
 		Message:    contentMSG,
 		Severity:   severity,
 		State:      state,
