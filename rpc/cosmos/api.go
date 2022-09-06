@@ -38,7 +38,11 @@ type Status struct {
 			LatestAppHash     string `json:"latest_app_hash"`
 			LatestBlockHeight string `json:"latest_block_height"`
 			LatestBlockTime   string `json:"latest_block_time"`
-			CachingUp         bool   `json:"caching_up"`
+			EarliestBlockHash	string	`json:"earliest_block_hash"`
+			EarliestAppHash		string	`json:"earliest_app_hash"`
+			EarliestBlockHeight	string	`json:"earliest_block_height"`
+			EarliestBlockTime	string	`json:"earliest_block_time"`
+			CatchingUp         bool   `json:"catching_up"`
 		} `json:"sync_info"`
 		ValidatorInfo struct {
 			Address string `json:"address"`
