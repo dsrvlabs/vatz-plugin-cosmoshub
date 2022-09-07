@@ -60,10 +60,10 @@ type Client interface {
 	GetStatus() (*Status, error)
 }
 
-type heimdallClient struct {
+type cosmoshubClient struct {
 }
 
-func (c *heimdallClient) GetStatus() (*Status, error) {
+func (c *cosmoshubClient) GetStatus() (*Status, error) {
 	req, err := http.NewRequest(http.MethodGet, localRPCAddr+"/status", nil)
 	if err != nil {
 		return nil, err
@@ -94,7 +94,7 @@ func (c *heimdallClient) GetStatus() (*Status, error) {
 	return status, nil
 }
 
-func (c *heimdallClient) parseRawStatus(content []byte) (*Status, error) {
+func (c *cosmoshubClient) parseRawStatus(content []byte) (*Status, error) {
 	d := Status{}
 	err := json.Unmarshal(content, &d)
 	if err != nil {
@@ -106,5 +106,5 @@ func (c *heimdallClient) parseRawStatus(content []byte) (*Status, error) {
 
 // NewClient creates client for RPC.
 func NewClient() Client {
-	return &heimdallClient{}
+	return &cosmoshubClient{}
 }
