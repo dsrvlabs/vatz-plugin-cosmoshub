@@ -11,10 +11,10 @@ const (
 	localRPCAddr = "http://localhost:26657"
 )
 
-// Status is response entity frmo REST.
+// Status is response entity from REST.
 type Status struct {
 	Jsonrpc string `json:"jsonrpc"`
-	ID      int `json:"id"`
+	ID      int    `json:"id"`
 	Result  struct {
 		NodeInfo struct {
 			ProtocolVersion struct {
@@ -34,15 +34,15 @@ type Status struct {
 			} `json:"other"`
 		} `json:"node_info"`
 		SyncInfo struct {
-			LatestBlockHash   string `json:"latest_block_hash"`
-			LatestAppHash     string `json:"latest_app_hash"`
-			LatestBlockHeight string `json:"latest_block_height"`
-			LatestBlockTime   string `json:"latest_block_time"`
-			EarliestBlockHash	string	`json:"earliest_block_hash"`
-			EarliestAppHash		string	`json:"earliest_app_hash"`
-			EarliestBlockHeight	string	`json:"earliest_block_height"`
-			EarliestBlockTime	string	`json:"earliest_block_time"`
-			CatchingUp         bool   `json:"catching_up"`
+			LatestBlockHash     string `json:"latest_block_hash"`
+			LatestAppHash       string `json:"latest_app_hash"`
+			LatestBlockHeight   string `json:"latest_block_height"`
+			LatestBlockTime     string `json:"latest_block_time"`
+			EarliestBlockHash   string `json:"earliest_block_hash"`
+			EarliestAppHash     string `json:"earliest_app_hash"`
+			EarliestBlockHeight string `json:"earliest_block_height"`
+			EarliestBlockTime   string `json:"earliest_block_time"`
+			CatchingUp          bool   `json:"catching_up"`
 		} `json:"sync_info"`
 		ValidatorInfo struct {
 			Address string `json:"address"`
