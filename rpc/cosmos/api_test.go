@@ -12,12 +12,12 @@ func TestAPI(t *testing.T) {
 }
 
 func TestParse(t *testing.T) {
-	c := heimdallClient{}
+	c := cosmoshubClient{}
 	status, err := c.parseRawStatus([]byte(fixtureStatus))
 
 	assert.Nil(t, err)
-	assert.Equal(t, false, status.Result.SyncInfo.CachingUp)
-	assert.Equal(t, "9869741", status.Result.SyncInfo.LatestBlockHeight)
+	assert.Equal(t, false, status.Result.SyncInfo.CatchingUp)
+	assert.Equal(t, "12232219", status.Result.SyncInfo.LatestBlockHeight)
 }
 
 func TestGetStatus(t *testing.T) {
@@ -34,6 +34,6 @@ func TestGetStatus(t *testing.T) {
 	status, err := c.GetStatus()
 
 	assert.Nil(t, err)
-	assert.Equal(t, "9869741", status.Result.SyncInfo.LatestBlockHeight)
-	assert.False(t, status.Result.SyncInfo.CachingUp, true)
+	assert.Equal(t, "12232219", status.Result.SyncInfo.LatestBlockHeight)
+	assert.False(t, status.Result.SyncInfo.CatchingUp, true)
 }
