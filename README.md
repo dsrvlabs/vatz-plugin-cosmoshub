@@ -55,7 +55,10 @@ Usage of cosmos-sdk-blocksync:
 - is_alived
 ```
 Usage of is_alived:
-TBD
+  -addr string
+    	IP Address(e.g. 0.0.0.0, 127.0.0.1) (default "127.0.0.1")
+  -port int
+    	Port number, default 9098 (default 9098)
 ```
 - peer_count
 ```
