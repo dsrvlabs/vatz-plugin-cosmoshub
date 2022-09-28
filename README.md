@@ -36,7 +36,11 @@ $ is_alived
 ```
 ```
 $ peer_count
-TBD
+2022-09-28T09:21:22Z INF Register module=grpc
+2022-09-28T09:21:22Z INF Start 127.0.0.1 9095 module=sdk
+2022-09-28T09:21:22Z INF Start module=grpc
+2022-09-28T09:21:32Z INF Execute module=grpc
+2022-09-28T09:21:32Z INF [cosmos-mainnet-sentry2-do]Good: peer_count is 56 moudle=plugin
 ```
 
 ## Command line arguments
@@ -56,5 +60,10 @@ TBD
 - peer_count
 ```
 Usage of peer_count:
-TBD
+  -addr string
+        IP Address(e.g. 0.0.0.0, 127.0.0.1) (default "127.0.0.1")
+  -minPeer int
+        minimum peer count, default 5 (default 5)
+  -port int
+        Port number, default 9091 (default 9091)
 ```
