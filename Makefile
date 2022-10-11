@@ -15,4 +15,7 @@ clean:
 		cd $$dir && go clean && cd ../../; \
 	done
 
-.PHONY: all install clean $(SUBDIRS)
+test:
+	go test ./...
+
+.PHONY: all install clean test $(SUBDIRS)
