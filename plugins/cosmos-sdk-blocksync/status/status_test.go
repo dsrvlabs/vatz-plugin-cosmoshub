@@ -18,7 +18,7 @@ func TestCollector(t *testing.T) {
 	// Mock
 	mockStatus := rpcCosmos.Status{}
 	mockStatus.Result.SyncInfo.LatestBlockHeight = "123456"
-	mockStatus.Result.SyncInfo.CachingUp = false
+	mockStatus.Result.SyncInfo.CatchingUp = false
 
 	mockClient := mocks.Client{}
 	mockClient.On("GetStatus").Return(&mockStatus, nil)
@@ -46,7 +46,7 @@ func TestIgnoreDuplicate(t *testing.T) {
 	// Mock
 	mockStatus := rpcCosmos.Status{}
 	mockStatus.Result.SyncInfo.LatestBlockHeight = "123456"
-	mockStatus.Result.SyncInfo.CachingUp = false
+	mockStatus.Result.SyncInfo.CatchingUp = false
 
 	mockClient := mocks.Client{}
 	mockClient.On("GetStatus").Return(&mockStatus, nil)
