@@ -66,7 +66,7 @@ func pluginFeature(info, option map[string]*structpb.Value) (sdk.CallResponse, e
 		}
 	} else {
 		severity = pluginpb.SEVERITY_ERROR
-		msg = "[%s]Error to get #N peers"
+		msg = "Error to get #N peers"
 		log.Info().Str("moudle", "plugin").Msg(msg)
 	}
 
