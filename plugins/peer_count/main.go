@@ -4,8 +4,8 @@ import (
 	"flag"
 	"fmt"
 	"strconv"
-	"os"
 
+	rpcNetInfo "github.com/dsrvlabs/vatz-plugin-cosmoshub/rpc/cosmos"
 	pluginpb "github.com/dsrvlabs/vatz-proto/plugin/v1"
 	"github.com/dsrvlabs/vatz/sdk"
 	"github.com/rs/zerolog/log"
@@ -51,23 +51,23 @@ func pluginFeature(info, option map[string]*structpb.Value) (sdk.CallResponse, e
 	state := pluginpb.STATE_NONE
 
 	var msg string
-	var hostname string
 
-	peers, err := GetNpeers()
+	peers, err := rpcNetInfo.GetNpeers()
 	if err == nil {
 		npeer, _ := strconv.Atoi(peers)
 		if npeer < minPeer {
 			severity = pluginpb.SEVERITY_CRITICAL
-			hostname, _ = os.Hostname()
-			msg = fmt.Sprintf("[%s]Bad: peer_count is %d", hostname, npeer)
+			msg = fmt.Sprintf("Bad: peer_count is %d", npeer)
 			log.Info().Str("moudle", "plugin").Msg(msg)
 		} else {
 			state = pluginpb.STATE_SUCCESS
-			hostname, _ = os.Hostname()
-			msg = fmt.Sprintf("[%s]Good: peer_count is %d", hostname, npeer)
+			msg = fmt.Sprintf("Good: peer_count is %d", npeer)
 			log.Info().Str("moudle", "plugin").Msg(msg)
-
 		}
+	} else {
+		severity = pluginpb.SEVERITY_ERROR
+		msg = "Error to get #N peers"
+		log.Info().Str("moudle", "plugin").Msg(msg)
 	}
 
 	ret := sdk.CallResponse{
