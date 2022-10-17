@@ -57,15 +57,19 @@ func pluginFeature(info, option map[string]*structpb.Value) (sdk.CallResponse, e
 		npeer, _ := strconv.Atoi(peers)
 		if npeer < minPeer {
 			severity = pluginpb.SEVERITY_CRITICAL
+			state = pluginpb.STATE_SUCCESS
 			msg = fmt.Sprintf("Bad: peer_count is %d", npeer)
 			log.Info().Str("moudle", "plugin").Msg(msg)
 		} else {
+			severity = pluginpb.SEVERITY_INFO
 			state = pluginpb.STATE_SUCCESS
 			msg = fmt.Sprintf("Good: peer_count is %d", npeer)
 			log.Info().Str("moudle", "plugin").Msg(msg)
 		}
 	} else {
-		severity = pluginpb.SEVERITY_ERROR
+		// Maybe node wil be killed. So other alert comes to you.
+		severity = pluginpb.SEVERITY_CRITICAL
+		state = pluginpb.STATE_SUCCESS
 		msg = "Error to get #N peers"
 		log.Info().Str("moudle", "plugin").Msg(msg)
 	}
