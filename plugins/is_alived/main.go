@@ -37,8 +37,8 @@ type HealthResult struct {
 
 func main() {
 	flag.StringVar(&addr, "addr", defaultAddr, "IP Address(e.g. 0.0.0.0, 127.0.0.1)")
-	flag.IntVar(&port, "port", defaultPort, "Port number, default 9098")
-	flag.StringVar(&rpcAddr, "rpcAddr", defaultRPCAddr, "RPC addrest:port, default http://localhost:26657 (e.g. http://127.0.0.1:26667)")
+	flag.IntVar(&port, "port", defaultPort, "Port number")
+	flag.StringVar(&rpcAddr, "rpcAddr", defaultRPCAddr, "RPC addrest:port (e.g. http://127.0.0.1:26667)")
 
 	flag.Parse()
 
