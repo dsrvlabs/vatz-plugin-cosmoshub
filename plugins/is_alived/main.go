@@ -56,12 +56,11 @@ func pluginFeature(info, option map[string]*structpb.Value) (sdk.CallResponse, e
 	severity := pluginpb.SEVERITY_INFO
 	healthStatus, err := health.GetHealth(rpcAddr)
 	if err != nil {
-		contentMSG := "request error"
-		severity := pluginpb.SEVERITY_ERROR
+		contentMSG := "UNHEALTHY"
 		return sdk.CallResponse{
 			FuncName:   "gaiadUP",
 			Message:    contentMSG,
-			Severity:   severity,
+			Severity:   pluginpb.SEVERITY_CRITICAL,
 			State:      state,
 			AlertTypes: []pluginpb.ALERT_TYPE{pluginpb.ALERT_TYPE_DISCORD},
 		}, err
@@ -71,11 +70,11 @@ func pluginFeature(info, option map[string]*structpb.Value) (sdk.CallResponse, e
 
 	if healthStatus == 200 {
 		log.Info().Str("process", "up").Msg(fmt.Sprintf("gaiad Process alive"))
-		contentMSG = "gaiad Process is UP"
+		contentMSG = "HEALTHY"
 		state = pluginpb.STATE_SUCCESS
 	} else {
 		log.Info().Str("process", "up").Msg(fmt.Sprintf("gaiad Process died"))
-		contentMSG = "gaiad Process is DOWN"
+		contentMSG = "UNHEALTHY"
 		severity = pluginpb.SEVERITY_CRITICAL
 	}
 
