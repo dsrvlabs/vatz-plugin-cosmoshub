@@ -42,3 +42,9 @@ const fixtureStatus string = `{
     }
   }
 }`
+
+const fixtureHealth string = `{
+  "id": 0,
+  "jsonrpc": "2.0",
+  "result": {}
+}`
