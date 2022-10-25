@@ -3,9 +3,8 @@ package main
 import (
 	"flag"
 	"fmt"
-	"strconv"
 
-	rpcNetInfo "github.com/dsrvlabs/vatz-plugin-cosmoshub/rpc/cosmos"
+	rpcCosmos "github.com/dsrvlabs/vatz-plugin-cosmoshub/rpc/cosmos"
 	pluginpb "github.com/dsrvlabs/vatz-proto/plugin/v1"
 	"github.com/dsrvlabs/vatz/sdk"
 	"github.com/rs/zerolog/log"
@@ -15,28 +14,33 @@ import (
 
 const (
 	// Default values.
-	defaultAddr = "127.0.0.1"
-	defaultPort = 9091
-	defaultPeer = 5
-
-	pluginName = "cosmoshub-peer-count"
+	defaultRPCAddr = "http://localhost:1317"
+	defaultAddr    = "127.0.0.1"
+	defaultPort    = 9100
+	pluginName     = "cosmoshub-active-status"
 )
 
 var (
-	addr    string
-	port    int
-	minPeer int
+	rpcAddr     string
+	addr        string
+	port        int
+	valoperAddr string
 )
 
 func init() {
-	flag.StringVar(&addr, "addr", defaultAddr, "IP Address(e.g. 0.0.0.0, 127.0.0.1)")
-	flag.IntVar(&port, "port", defaultPort, "Port number, default 9091")
-	flag.IntVar(&minPeer, "minPeer", defaultPeer, "minimum peer count, default 5")
+	flag.StringVar(&rpcAddr, "rpcURI", defaultRPCAddr, "CosmosHub RPC URI Address")
+	flag.StringVar(&addr, "addr", defaultAddr, "Listening address")
+	flag.IntVar(&port, "port", defaultPort, "Listening port")
+	flag.StringVar(&valoperAddr, "valoperAddr", "", "CosmosHub validator operator address")
 
 	flag.Parse()
 }
 
 func main() {
+	if valoperAddr == "" {
+		log.Fatal().Str("module", "plugin").Msg("Please specify -valoperAddr")
+	}
+
 	p := sdk.NewPlugin(pluginName)
 	p.Register(pluginFeature)
 
@@ -52,25 +56,23 @@ func pluginFeature(info, option map[string]*structpb.Value) (sdk.CallResponse, e
 
 	var msg string
 
-	peers, err := rpcNetInfo.GetNpeers()
+	status, err := rpcCosmos.GetBondStatus(rpcAddr, valoperAddr)
+
 	if err == nil {
-		npeer, _ := strconv.Atoi(peers)
-		if npeer < minPeer {
-			severity = pluginpb.SEVERITY_CRITICAL
-			state = pluginpb.STATE_SUCCESS
-			msg = fmt.Sprintf("Bad: peer_count is %d", npeer)
-			log.Info().Str("moudle", "plugin").Msg(msg)
-		} else {
+		state = pluginpb.STATE_SUCCESS
+		if status == true {
 			severity = pluginpb.SEVERITY_INFO
-			state = pluginpb.STATE_SUCCESS
-			msg = fmt.Sprintf("Good: peer_count is %d", npeer)
-			log.Info().Str("moudle", "plugin").Msg(msg)
+			msg = fmt.Sprintf("Validator bonded. included active set")
+		} else {
+			severity = pluginpb.SEVERITY_CRITICAL
+			msg = fmt.Sprintf("Validator unbonded. kick out from active set")
 		}
+		log.Debug().Str("module", "plugin").Msg(msg)
 	} else {
 		// Maybe node wil be killed. So other alert comes to you.
 		severity = pluginpb.SEVERITY_CRITICAL
-		state = pluginpb.STATE_SUCCESS
-		msg = "Error to get #N peers"
+		state = pluginpb.STATE_FAILURE
+		msg = "Failed to get validator status"
 		log.Info().Str("moudle", "plugin").Msg(msg)
 	}
 
