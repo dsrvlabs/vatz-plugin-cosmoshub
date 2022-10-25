@@ -23,8 +23,8 @@ const (
 )
 
 var (
-	addr string
-	port int
+	addr    string
+	port    int
 	minPeer int
 )
 

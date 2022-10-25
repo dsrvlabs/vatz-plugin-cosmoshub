@@ -1,4 +1,4 @@
-package common
+package rpc
 
 const fixtureStatus string = `{
   "jsonrpc": "2.0",
