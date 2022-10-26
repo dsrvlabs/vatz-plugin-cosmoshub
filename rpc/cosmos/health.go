@@ -1,4 +1,4 @@
-package common
+package rpc
 
 import (
 	"net/http"
