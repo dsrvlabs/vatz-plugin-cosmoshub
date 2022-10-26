@@ -48,3 +48,35 @@ const fixtureHealth string = `{
   "jsonrpc": "2.0",
   "result": {}
 }`
+
+const fixtureBondStatus string = `{
+  "validator": {
+    "operator_address": "cosmosvaloper1wlagucxdxvsmvj6330864x8q3vxz4x02rmvmsu",
+    "consensus_pubkey": {
+      "@type": "/cosmos.crypto.ed25519.PubKey",
+      "key": "efOai5jzck+C46Zt8ruUcD1w2E7wnDnL9u2ATsODIPg="
+    },
+    "jailed": false,
+    "status": "BOND_STATUS_BONDED",
+    "tokens": "36504214653",
+    "delegator_shares": "36504214653.000000000000000000",
+    "description": {
+      "moniker": "DSRV",
+      "identity": "CC434B6FE536F51B",
+      "website": "https://dsrvlabs.com",
+      "security_contact": "",
+      "details": ""
+    },
+    "unbonding_height": "12485537",
+    "unbonding_time": "2022-11-07T15:27:59.955383084Z",
+    "commission": {
+      "commission_rates": {
+        "rate": "0.100000000000000000",
+        "max_rate": "0.900000000000000000",
+        "max_change_rate": "0.100000000000000000"
+      },
+      "update_time": "2021-02-26T15:02:19.028351586Z"
+    },
+    "min_self_delegation": "1"
+  }
+}`
