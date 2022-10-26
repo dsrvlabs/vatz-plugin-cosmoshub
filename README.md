@@ -5,6 +5,7 @@ Vatz plugin for cosmoshub node monitoring
 - cosmos-sdk-blocksync : monitor block sync status
 - is_alived : monitor `gaiad` running status
 - peer_count : monitor the number of peers
+- active_status : monitor the validator include in active set
 
 ## Installation and Usage
 > Please make sure [Vatz](https://github.com/dsrvlabs/vatz) is running with proper configuration. [Vatz Installation Guide](https://github.com/dsrvlabs/vatz/blob/main/docs/installation.md)
@@ -42,6 +43,14 @@ $ peer_count
 2022-09-28T09:21:32Z INF Execute module=grpc
 2022-09-28T09:21:32Z INF [cosmos-mainnet-sentry2-do]Good: peer_count is 56 moudle=plugin
 ```
+```
+$ active_status -valoperAddr <VALIDATOR_OPERATOR_ADDRESS>
+2022-10-26T11:42:35+02:00 INF Register module=grpc
+2022-10-26T11:42:35+02:00 INF Start 127.0.0.1 9100 module=sdk
+2022-10-26T11:42:35+02:00 INF Start module=grpc
+2022-10-26T11:42:42+02:00 INF Execute module=grpc
+2022-10-26T11:42:42+02:00 DBG Validator bonded. included active set module=plugin
+```
 
 ## Command line arguments
 - cosmos-sdk-blocksync
@@ -69,4 +78,16 @@ Usage of peer_count:
         minimum peer count, default 5 (default 5)
   -port int
         Port number, default 9091 (default 9091)
+```
+- active_status
+```
+Usage of active_status:
+  -addr string
+    	Listening address (default "127.0.0.1")
+  -port int
+    	Listening port (default 9100)
+  -rpcURI string
+    	CosmosHub RPC URI Address (default "http://localhost:1317")
+  -valoperAddr string
+    	CosmosHub validator operator address
 ```
