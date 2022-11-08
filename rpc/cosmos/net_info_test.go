@@ -14,7 +14,7 @@ func TestGetNpeers(t *testing.T) {
 
 	httpmock.RegisterResponder(
 		http.MethodGet,
-		"https://agoric-mainnet-rpc.allthatnode.com:26657/net_info",
+		"http://localhost:26657/net_info",
 		httpmock.NewStringResponder(http.StatusOK, fixturePeerCount),
 	)
 
