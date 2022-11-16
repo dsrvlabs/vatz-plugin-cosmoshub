@@ -56,6 +56,7 @@ func pluginFeature(info, option map[string]*structpb.Value) (sdk.CallResponse, e
 	severity := pluginpb.SEVERITY_INFO
 	healthStatus, err := health.GetHealth(rpcAddr)
 	if err != nil {
+		log.Error().Str("GetHealth", "Error").Msg(fmt.Sprintf("%v", err))
 		contentMSG := "UNHEALTHY"
 		return sdk.CallResponse{
 			FuncName:   "GetHealth",
