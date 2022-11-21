@@ -2,7 +2,7 @@
 Vatz plugin for cosmoshub node monitoring
 
 ## Plugins
-- cosmos-sdk-blocksync : monitor block sync status
+- node_block_sync : monitor block sync status
 - is_alived : monitor `gaiad` running status
 - peer_count : monitor the number of peers
 - active_status : monitor the validator include in active set
@@ -18,7 +18,7 @@ $ make install
 ### Run
 > Run as default config
 ```
-$ cosmos-sdk-blocksync
+$ node_block_sync
 2022-09-14T08:35:27+02:00 INF Start main=statusCollector
 2022-09-14T08:35:27+02:00 INF Register module=grpc
 2022-09-14T08:35:27+02:00 INF Start 127.0.0.1 9091 module=sdk
@@ -53,9 +53,9 @@ $ active_status -valoperAddr <VALIDATOR_OPERATOR_ADDRESS>
 ```
 
 ## Command line arguments
-- cosmos-sdk-blocksync
+- node_block_sync
 ```
-Usage of cosmos-sdk-blocksync:
+Usage of node_block_sync:
   -addr string
     	IP Address(e.g. 0.0.0.0, 127.0.0.1) (default "127.0.0.1")
   -port int
