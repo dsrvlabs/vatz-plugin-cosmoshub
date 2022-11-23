@@ -3,9 +3,9 @@ Vatz plugin for cosmoshub node monitoring
 
 ## Plugins
 - node_block_sync : monitor block sync status
-- is_alived : monitor `gaiad` running status
-- peer_count : monitor the number of peers
-- active_status : monitor the validator include in active set
+- node_is_alived : monitor `gaiad` running status
+- node_peer_count : monitor the number of peers
+- node_active_status : monitor the validator include in active set
 
 ## Installation and Usage
 > Please make sure [Vatz](https://github.com/dsrvlabs/vatz) is running with proper configuration. [Vatz Installation Guide](https://github.com/dsrvlabs/vatz/blob/main/docs/installation.md)
@@ -19,16 +19,21 @@ $ make install
 > Run as default config
 ```
 $ node_block_sync
-2022-09-14T08:35:27+02:00 INF Start main=statusCollector
-2022-09-14T08:35:27+02:00 INF Register module=grpc
-2022-09-14T08:35:27+02:00 INF Start 127.0.0.1 9091 module=sdk
-2022-09-14T08:35:27+02:00 INF Start module=grpc
-2022-09-14T08:35:29+02:00 INF Execute module=grpc
-2022-09-14T08:35:29+02:00 INF pluginFeature: string_value:"getBlockSync" main=main
-2022-09-14T08:35:29+02:00 INF estimate policy=blockSyncEstimator
+2022-11-23T08:44:08Z INF Register module=grpc
+2022-11-23T08:44:08Z INF Start 127.0.0.1 9091 module=sdk
+2022-11-23T08:44:08Z INF Start module=grpc
+2022-11-23T08:44:09Z INF Execute module=grpc
+2022-11-23T08:44:09Z INF previous block height: 0, latest block height: 11662932 module=plugin
+2022-11-23T08:44:09Z DBG block height increasing module=plugin
+2022-11-23T08:44:13Z INF Execute module=grpc
+2022-11-23T08:44:13Z INF previous block height: 11662932, latest block height: 11662933 module=plugin
+2022-11-23T08:44:13Z DBG block height increasing module=plugin
+2022-11-23T08:44:18Z INF Execute module=grpc
+2022-11-23T08:44:19Z INF previous block height: 11662933, latest block height: 11662935 module=plugin
+2022-11-23T08:44:19Z DBG block height increasing module=plugin
 ```
 ```
-$ is_alived
+$ node_is_alived
 2022-09-14T08:36:29+02:00 INF Register module=grpc
 2022-09-14T08:36:29+02:00 INF Start 0.0.0.0 9098 module=sdk
 2022-09-14T08:36:29+02:00 INF Start module=grpc
@@ -36,7 +41,7 @@ $ is_alived
 2022-09-14T08:36:29+02:00 INF gaiad Process alive process=up
 ```
 ```
-$ peer_count
+$ node_peer_count
 2022-09-28T09:21:22Z INF Register module=grpc
 2022-09-28T09:21:22Z INF Start 127.0.0.1 9095 module=sdk
 2022-09-28T09:21:22Z INF Start module=grpc
@@ -44,7 +49,7 @@ $ peer_count
 2022-09-28T09:21:32Z INF [cosmos-mainnet-sentry2-do]Good: peer_count is 56 moudle=plugin
 ```
 ```
-$ active_status -valoperAddr <VALIDATOR_OPERATOR_ADDRESS>
+$ node_active_status -valoperAddr <VALIDATOR_OPERATOR_ADDRESS>
 2022-10-26T11:42:35+02:00 INF Register module=grpc
 2022-10-26T11:42:35+02:00 INF Start 127.0.0.1 9100 module=sdk
 2022-10-26T11:42:35+02:00 INF Start module=grpc
@@ -57,21 +62,25 @@ $ active_status -valoperAddr <VALIDATOR_OPERATOR_ADDRESS>
 ```
 Usage of node_block_sync:
   -addr string
-    	IP Address(e.g. 0.0.0.0, 127.0.0.1) (default "127.0.0.1")
+	Listening address (default "127.0.0.1")
+  -critical int
+	block height stucked count to raise critical level of alert (default 3)
   -port int
-    	Port number, default 9091 (default 9091)
+	Listening port (default 9091)
+  -rpcURI string
+	Tendermint RPC URI Address (default "http://localhost:26657")
 ```
-- is_alived
+- node_is_alived
 ```
-Usage of is_alived:
+Usage of node_is_alived:
   -addr string
     	IP Address(e.g. 0.0.0.0, 127.0.0.1) (default "127.0.0.1")
   -port int
     	Port number, default 9098 (default 9098)
 ```
-- peer_count
+- node_peer_count
 ```
-Usage of peer_count:
+Usage of node_peer_count:
   -addr string
         IP Address(e.g. 0.0.0.0, 127.0.0.1) (default "127.0.0.1")
   -minPeer int
@@ -79,9 +88,9 @@ Usage of peer_count:
   -port int
         Port number, default 9091 (default 9091)
 ```
-- active_status
+- node_active_status
 ```
-Usage of active_status:
+Usage of node_active_status:
   -addr string
     	Listening address (default "127.0.0.1")
   -port int
