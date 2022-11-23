@@ -7,10 +7,6 @@ import (
 	"net/http"
 )
 
-const (
-	localRPCAddr = "http://localhost:26657"
-)
-
 // Status is response entity from REST.
 type Status struct {
 	Jsonrpc string `json:"jsonrpc"`
@@ -55,16 +51,8 @@ type Status struct {
 	} `json:"result"`
 }
 
-// Client provices rpc interfaces.
-type Client interface {
-	GetStatus() (*Status, error)
-}
-
-type cosmoshubClient struct {
-}
-
-func (c *cosmoshubClient) GetStatus() (*Status, error) {
-	req, err := http.NewRequest(http.MethodGet, localRPCAddr+"/status", nil)
+func GetStatus(rpcAddr string) (*Status, error) {
+	req, err := http.NewRequest(http.MethodGet, rpcAddr+"/status", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -86,7 +74,7 @@ func (c *cosmoshubClient) GetStatus() (*Status, error) {
 		return nil, fmt.Errorf("request failed %s", string(rawBody))
 	}
 
-	status, err := c.parseRawStatus(rawBody)
+	status, err := parseRawStatus(rawBody)
 	if err != nil {
 		return nil, err
 	}
@@ -94,7 +82,7 @@ func (c *cosmoshubClient) GetStatus() (*Status, error) {
 	return status, nil
 }
 
-func (c *cosmoshubClient) parseRawStatus(content []byte) (*Status, error) {
+func parseRawStatus(content []byte) (*Status, error) {
 	d := Status{}
 	err := json.Unmarshal(content, &d)
 	if err != nil {
@@ -102,9 +90,4 @@ func (c *cosmoshubClient) parseRawStatus(content []byte) (*Status, error) {
 	}
 
 	return &d, nil
-}
-
-// NewClient creates client for RPC.
-func NewClient() Client {
-	return &cosmoshubClient{}
 }
