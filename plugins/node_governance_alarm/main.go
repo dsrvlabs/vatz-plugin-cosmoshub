@@ -19,7 +19,8 @@ const (
 	defaultPort = 9091
 	defaultPeer = 5
 	defaultApiPort = 1317
-	defaultProposalId = 100
+	defaultProposalId = 0
+	iterCnt = 100
 
 	pluginName = "node-governance-alarm"
 )
@@ -38,6 +39,33 @@ func init() {
 	flag.UintVar(&proposalId, "proposalId", defaultProposalId, "Need to know last proposal id")
 
 	flag.Parse()
+
+	findLastestProposalId()
+}
+
+func findLastestProposalId() {
+	proposalId = 0
+	cntNotFoundProp := 0
+	fmt.Println("zz", proposalId)
+
+	var msg string
+
+	for i := 1; ; i++ {
+		prop, err := rpcGovernance.GetProposal(apiPort, uint(i))
+		if err == nil {
+			num_prop, _ := strconv.Atoi(prop)
+			msg += fmt.Sprintf("New proposal : %d\n", num_prop)
+			proposalId = uint(i)
+			cntNotFoundProp = 0
+		} else {
+			cntNotFoundProp++
+			if cntNotFoundProp == iterCnt {
+				msg += fmt.Sprintf("Lastest proposal is #%d", proposalId)
+				break
+			}
+		}
+	}
+	log.Info().Str("module", "plugin").Msg(msg)
 }
 
 func main() {
@@ -58,14 +86,14 @@ func pluginFeature(info, option map[string]*structpb.Value) (sdk.CallResponse, e
 	tmp := proposalId
 	fmt.Println("Debug: last proposal = ", proposalId)
 
-	for i := 1; i <= 100; i++ {
+	for i := 1; i <= iterCnt; i++ {
 		prop, err := rpcGovernance.GetProposal(apiPort, tmp + uint(i))
 		if err == nil {
 			num_prop, _ := strconv.Atoi(prop)
 			msg += fmt.Sprintf("New proposal : %d\n", num_prop)
 			proposalId = tmp + uint(i)
 		} else {
-			if i == 100 {
+			if i == iterCnt {
 				msg += fmt.Sprintf("Lastest proposal is #%d", proposalId)
 			}
 		}
