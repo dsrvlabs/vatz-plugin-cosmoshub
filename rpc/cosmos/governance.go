@@ -43,7 +43,9 @@ type Governance struct {
 }
 
 func GetProposal(apiPort uint, prop uint) (string, error) {
-	url := fmt.Sprintf("http://localhost:%d/cosmos/gov/v1beta1/proposal/%d", apiPort, prop)
+	url := fmt.Sprintf("http://localhost:%d/cosmos/gov/v1beta1/proposals/%d", apiPort, prop)
+	//url := fmt.Sprintf("https://api.cosmos.network/cosmos/gov/v1beta1/proposals/%d", prop)
+	//fmt.Println(url)
 	req, err := http.NewRequest(http.MethodGet, url, nil)
 	if err != nil {
 		return err.Error(), err

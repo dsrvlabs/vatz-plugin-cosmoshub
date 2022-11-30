@@ -35,7 +35,7 @@ func init() {
 	flag.StringVar(&addr, "addr", defaultAddr, "IP Address(e.g. 0.0.0.0, 127.0.0.1)")
 	flag.IntVar(&port, "port", defaultPort, "Port number, default 9091")
 	flag.UintVar(&apiPort, "apiPort", defaultApiPort, "Need to know proposal id")
-	flag.UintVar(&proposalId, "last proposal id", defaultProposalId, "Need to know last proposal id")
+	flag.UintVar(&proposalId, "proposalId", defaultProposalId, "Need to know last proposal id")
 
 	flag.Parse()
 }
@@ -55,35 +55,31 @@ func pluginFeature(info, option map[string]*structpb.Value) (sdk.CallResponse, e
 	state := pluginpb.STATE_NONE
 
 	var msg string
+	tmp := proposalId
+	fmt.Println("Debug: last proposal = ", proposalId)
 
-	prop, err := rpcGovernance.GetProposal(apiPort, proposalId)
-	if err == nil {
-		num_prop, _ := strconv.Atoi(prop)
+	for i := 1; i <= 100; i++ {
+		prop, err := rpcGovernance.GetProposal(apiPort, tmp + uint(i))
+		if err == nil {
+			num_prop, _ := strconv.Atoi(prop)
+			msg += fmt.Sprintf("New proposal : %d\n", num_prop)
+			proposalId = tmp + uint(i)
+		} else {
+			if i == 100 {
+				msg += fmt.Sprintf("Lastest proposal is #%d", proposalId)
+			}
+		}
+	}
+	if tmp == proposalId {
+		fmt.Println("DEBUG : tmp == proposalId")
 		severity = pluginpb.SEVERITY_INFO
 		state = pluginpb.STATE_SUCCESS
-		msg = fmt.Sprintf("New proposal : %d", num_prop)
-		log.Info().Str("module", "plugin").Msg(msg)
-		/*
-		if npeer < minPeer {
-			severity = pluginpb.SEVERITY_CRITICAL
-			state = pluginpb.STATE_SUCCESS
-			msg = fmt.Sprintf("Bad: peer_count is %d", npeer)
-			log.Info().Str("moudle", "plugin").Msg(msg)
-		} else {
-			severity = pluginpb.SEVERITY_INFO
-			state = pluginpb.STATE_SUCCESS
-			msg = fmt.Sprintf("Good: peer_count is %d", npeer)
-			log.Info().Str("moudle", "plugin").Msg(msg)
-		}
-		*/
 	} else {
-		// Maybe node wil be killed. So other alert comes to you.
+		fmt.Println("DEBUG : tmp != proposalId")
 		severity = pluginpb.SEVERITY_CRITICAL
 		state = pluginpb.STATE_SUCCESS
-		msg = "Error to get proposal id"
-		log.Info().Str("moudle", "plugin").Msg(msg)
 	}
-
+	log.Info().Str("module", "plugin").Msg(msg)
 	ret := sdk.CallResponse{
 		FuncName:   info["execute_method"].GetStringValue(),
 		Message:    msg,
@@ -91,6 +87,5 @@ func pluginFeature(info, option map[string]*structpb.Value) (sdk.CallResponse, e
 		State:      state,
 		AlertTypes: []pluginpb.ALERT_TYPE{pluginpb.ALERT_TYPE_DISCORD},
 	}
-
 	return ret, nil
 }
