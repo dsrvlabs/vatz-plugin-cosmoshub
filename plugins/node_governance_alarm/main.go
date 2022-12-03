@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"strconv"
+	"time"
 
 	rpcGovernance "github.com/dsrvlabs/vatz-plugin-cosmoshub/rpc/cosmos"
 	pluginpb "github.com/dsrvlabs/vatz-proto/plugin/v1"
@@ -51,10 +52,10 @@ func findLastestProposalId() {
 	var msg string
 
 	for i := 1; ; i++ {
-		prop, err := rpcGovernance.GetProposal(apiPort, uint(i))
-		if err == nil {
+		prop, t, err := rpcGovernance.GetProposal(apiPort, uint(i))
+		if err == nil && t.Year() > time.Now().Year() / 2 {
 			num_prop, _ := strconv.Atoi(prop)
-			msg += fmt.Sprintf("New proposal : %d\n", num_prop)
+			msg += fmt.Sprintf("New proposal : %d, %d-%02d-%02d\n", num_prop, t.Year(), t.Month(), t.Day())
 			proposalId = uint(i)
 			cntNotFoundProp = 0
 		} else {
@@ -87,10 +88,10 @@ func pluginFeature(info, option map[string]*structpb.Value) (sdk.CallResponse, e
 	fmt.Println("Debug: last proposal = ", proposalId)
 
 	for i := 1; i <= iterCnt; i++ {
-		prop, err := rpcGovernance.GetProposal(apiPort, tmp + uint(i))
-		if err == nil {
+		prop, t, err := rpcGovernance.GetProposal(apiPort, tmp + uint(i))
+		if err == nil && t.Year() > time.Now().Year() / 2 {
 			num_prop, _ := strconv.Atoi(prop)
-			msg += fmt.Sprintf("New proposal : %d\n", num_prop)
+			msg += fmt.Sprintf("New proposal : %d, %d-%02d-%02d\n", num_prop, t.Year(), t.Month(), t.Day())
 			proposalId = tmp + uint(i)
 		} else {
 			if i == iterCnt {

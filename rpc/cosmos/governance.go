@@ -42,37 +42,37 @@ type Governance struct {
 	} `json:"proposal"`
 }
 
-func GetProposal(apiPort uint, prop uint) (string, error) {
+func GetProposal(apiPort uint, prop uint) (string, time.Time, error) {
 	url := fmt.Sprintf("http://localhost:%d/cosmos/gov/v1beta1/proposals/%d", apiPort, prop)
 	//url := fmt.Sprintf("https://api.cosmos.network/cosmos/gov/v1beta1/proposals/%d", prop)
 	//fmt.Println(url)
 	req, err := http.NewRequest(http.MethodGet, url, nil)
 	if err != nil {
-		return err.Error(), err
+		return err.Error(), time.Now(), err
 	}
 
 	req.Header.Add("Content-Type", "application/json")
 	client := http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
-		return err.Error(), err
+		return err.Error(), time.Now(), err
 	}
 
 	rawBody, err := io.ReadAll(resp.Body)
 	if err != nil {
-		return err.Error(), err
+		return err.Error(), time.Now(), err
 	}
 
 	if resp.StatusCode != http.StatusOK {
-		return strconv.Itoa(resp.StatusCode), fmt.Errorf("request failed %s", string(rawBody))
+		return strconv.Itoa(resp.StatusCode), time.Now(), fmt.Errorf("request failed %s", string(rawBody))
 	}
 
 	gov := Governance{}
 	err = json.Unmarshal(rawBody, &gov)
 
 	if err != nil {
-		return err.Error(), err
+		return err.Error(), time.Now(), err
 	}
 
-	return gov.Proposal.ProposalID, nil
+	return gov.Proposal.ProposalID, gov.Proposal.VotingStartTime, nil
 }
