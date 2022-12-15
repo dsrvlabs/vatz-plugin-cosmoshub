@@ -80,7 +80,7 @@ func pluginFeature(info, option map[string]*structpb.Value) (sdk.CallResponse, e
 		}
 		log.Debug().Str("module", "plugin").Msg(msg)
 	} else {
-		// Maybe node wil be killed. So other alert comes to you.
+		// Maybe node will be killed. So other alert comes to you.
 		severity = pluginpb.SEVERITY_CRITICAL
 		state = pluginpb.STATE_FAILURE
 		msg = "Failed to get node status"
