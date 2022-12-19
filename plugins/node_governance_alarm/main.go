@@ -16,24 +16,24 @@ import (
 
 const (
 	// Default values.
-	defaultAddr = "127.0.0.1"
-	defaultPort = 9091
-	defaultPeer = 5
-	defaultApiPort = 1317
+	defaultAddr       = "127.0.0.1"
+	defaultPort       = 9091
+	defaultPeer       = 5
+	defaultApiPort    = 1317
 	defaultProposalId = 0
-	defaultVoterVote = "address"
-	iterCnt = 100
+	defaultVoterVote  = "address"
+	iterCnt           = 100
 
 	pluginName = "node-governance-alarm"
 )
 
 var (
-	addr		string
-	port		int
-	apiPort		uint
-	proposalId	uint
-	voterAddr	string
-	firstRun	int
+	addr       string
+	port       int
+	apiPort    uint
+	proposalId uint
+	voterAddr  string
+	firstRun   int
 )
 
 func init() {
@@ -81,14 +81,12 @@ func CheckVoterVote() string {
 func findLastestProposalId() {
 	proposalId = 0
 	cntNotFoundProp := 0
-	fmt.Println("zz", proposalId)
 
 	var msg string
 
 	for i := 1; ; i++ {
 		prop, t, err := rpcGovernance.GetProposal(apiPort, uint(i))
-		if err == nil && t.Year() > time.Now().Year() / 2 {
-		//if err == nil && t.After(time.Now()) {
+		if err == nil && t.Year() > time.Now().Year()/2 {
 			num_prop, _ := strconv.Atoi(prop)
 			msg += fmt.Sprintf("New proposal : %d, %d-%02d-%02d\n", num_prop, t.Year(), t.Month(), t.Day())
 			proposalId = uint(i)
@@ -124,8 +122,7 @@ func pluginFeature(info, option map[string]*structpb.Value) (sdk.CallResponse, e
 	tmp := proposalId
 
 	for i := 1; i <= iterCnt; i++ {
-		prop, t, err := rpcGovernance.GetProposal(apiPort, tmp + uint(i))
-		//if err == nil && t.Year() > time.Now().Year() / 2 {
+		prop, t, err := rpcGovernance.GetProposal(apiPort, tmp+uint(i))
 		if err == nil && t.After(time.Now()) {
 			num_prop, _ := strconv.Atoi(prop)
 			msg += fmt.Sprintf("New proposal : %d, %d-%02d-%02d\n", num_prop, t.Year(), t.Month(), t.Day())
