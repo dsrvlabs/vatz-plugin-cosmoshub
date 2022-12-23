@@ -3,9 +3,10 @@ Vatz plugin for cosmoshub node monitoring
 
 ## Plugins
 - node_block_sync : monitor block sync status
-- node_is_alived : monitor `gaiad` running status
+- node_is_alived : monitor process running status
 - node_peer_count : monitor the number of peers
 - node_active_status : monitor the validator include in active set
+- node_governance_alarm : monitor the new governance proposal and whether or not to vote
 
 ## Installation and Usage
 > Please make sure [Vatz](https://github.com/dsrvlabs/vatz) is running with proper configuration. [Vatz Installation Guide](https://github.com/dsrvlabs/vatz/blob/main/docs/installation.md)
