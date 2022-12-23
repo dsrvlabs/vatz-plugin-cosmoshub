@@ -56,7 +56,18 @@ $ node_active_status -valoperAddr <VALIDATOR_OPERATOR_ADDRESS>
 2022-10-26T11:42:42+02:00 INF Execute module=grpc
 2022-10-26T11:42:42+02:00 DBG Validator bonded. included active set module=plugin
 ```
-
+```
+# Your node have to enable API configuration ({HOME_DIR}/config/app.toml)
+$ node_governance_alarm -port 9093 -apiPort <API server port{default is 1317}> -voterAddr <Account Address>
+Lastest proposal is #195 module=plugin
+2022-12-23T07:52:52Z INF Proposal #N: Dit not vote module=plugin
+2022-12-23T07:52:52Z INF Register module=grpc
+2022-12-23T07:52:52Z INF Start 127.0.0.1 9093 module=sdk
+2022-12-23T07:52:52Z INF Start module=grpc
+2022-12-23T07:53:15Z INF Execute module=grpc
+2022-12-23T07:53:15Z DBG DEBUG : tmp == proposalId module=plugin
+2022-12-23T07:53:15Z INF Proposal #N: Dit not vote module=plugin
+```
 ## Command line arguments
 - node_block_sync
 ```
@@ -99,4 +110,18 @@ Usage of node_active_status:
     	CosmosHub RPC URI Address (default "http://localhost:1317")
   -valoperAddr string
     	CosmosHub validator operator address
+```
+- node_governance_alarm
+```
+Usage of node_governance_alarm:
+  -addr string
+    	IP Address(e.g. 0.0.0.0, 127.0.0.1) (default "127.0.0.1")
+  -apiPort uint
+    	Need to know proposal id (default 1317)
+  -port int
+    	Port number, default 9091 (default 9091)
+  -proposalId uint
+    	Need to know last proposal id
+  -voterAddr string
+    	Need to voter address (default "address")
 ```
