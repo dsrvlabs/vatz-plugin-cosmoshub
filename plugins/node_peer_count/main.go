@@ -18,6 +18,7 @@ const (
 	defaultAddr = "127.0.0.1"
 	defaultPort = 9091
 	defaultPeer = 5
+	defaultTenderPort = 26657
 
 	pluginName = "cosmoshub-peer-count"
 )
@@ -26,12 +27,14 @@ var (
 	addr    string
 	port    int
 	minPeer int
+	tenderPort uint
 )
 
 func init() {
 	flag.StringVar(&addr, "addr", defaultAddr, "IP Address(e.g. 0.0.0.0, 127.0.0.1)")
 	flag.IntVar(&port, "port", defaultPort, "Port number, default 9091")
 	flag.IntVar(&minPeer, "minPeer", defaultPeer, "minimum peer count, default 5")
+	flag.UintVar(&tenderPort, "tendermintPort", defaultPeer, "tendermint port, default 26657")
 
 	flag.Parse()
 }
@@ -52,7 +55,7 @@ func pluginFeature(info, option map[string]*structpb.Value) (sdk.CallResponse, e
 
 	var msg string
 
-	peers, err := rpcNetInfo.GetNpeers()
+	peers, err := rpcNetInfo.GetNpeers(tenderPort)
 	if err == nil {
 		npeer, _ := strconv.Atoi(peers)
 		if npeer < minPeer {
