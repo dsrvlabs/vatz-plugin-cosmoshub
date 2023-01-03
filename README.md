@@ -14,7 +14,7 @@ Vatz plugin for cosmoshub node monitoring
 ### Install Plugins
 - Install with source
 ```
-$ git clone https://github.com/dsrvlabs/vatz-plugin-cosmoshub
+$ git clone https://github.com/dsrvlabs/vatz-plugin-cosmoshub.git
 $ cd vatz-plugin-cosmoshub
 $ make install
 ```
