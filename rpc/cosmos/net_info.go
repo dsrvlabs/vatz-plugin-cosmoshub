@@ -80,9 +80,8 @@ type netInfo struct {
 	} `json:"result"`
 }
 
-func GetNpeers(tenderPort uint) (string, error) {
-	url := fmt.Sprintf("http://localhost:%d/net_info", tenderPort)
-	req, err := http.NewRequest(http.MethodGet, url, nil)
+func GetNpeers(rpcAddr string) (string, error) {
+	req, err := http.NewRequest(http.MethodGet, rpcAddr+"/net_info", nil)
 	if err != nil {
 		return err.Error(), err
 	}
