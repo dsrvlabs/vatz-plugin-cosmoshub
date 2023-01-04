@@ -80,8 +80,8 @@ type netInfo struct {
 	} `json:"result"`
 }
 
-func GetNpeers() (string, error) {
-	req, err := http.NewRequest(http.MethodGet, "http://localhost:26657/net_info", nil)
+func GetNpeers(rpcAddr string) (string, error) {
+	req, err := http.NewRequest(http.MethodGet, rpcAddr+"/net_info", nil)
 	if err != nil {
 		return err.Error(), err
 	}
