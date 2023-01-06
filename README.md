@@ -63,54 +63,61 @@ $ vatz plugin list
 > Run as default config
 ```
 $ node_block_sync
-2022-11-23T08:44:08Z INF Register module=grpc
-2022-11-23T08:44:08Z INF Start 127.0.0.1 9091 module=sdk
-2022-11-23T08:44:08Z INF Start module=grpc
-2022-11-23T08:44:09Z INF Execute module=grpc
-2022-11-23T08:44:09Z INF previous block height: 0, latest block height: 11662932 module=plugin
-2022-11-23T08:44:09Z DBG block height increasing module=plugin
-2022-11-23T08:44:13Z INF Execute module=grpc
-2022-11-23T08:44:13Z INF previous block height: 11662932, latest block height: 11662933 module=plugin
-2022-11-23T08:44:13Z DBG block height increasing module=plugin
-2022-11-23T08:44:18Z INF Execute module=grpc
-2022-11-23T08:44:19Z INF previous block height: 11662933, latest block height: 11662935 module=plugin
-2022-11-23T08:44:19Z DBG block height increasing module=plugin
 ```
+2023-01-02T09:26:47Z INF Register module=grpc
+2023-01-02T09:26:47Z INF Start 127.0.0.1 9091 module=sdk
+2023-01-02T09:26:47Z INF Start module=grpc
+2023-01-02T09:26:56Z INF Execute module=grpc
+2023-01-02T09:26:56Z INF previous block height: 0, latest block height: 3791025 module=plugin
+2023-01-02T09:26:56Z DBG block height increasing module=plugin
+2023-01-02T09:27:25Z INF Execute module=grpc
+2023-01-02T09:27:25Z INF previous block height: 3791025, latest block height: 3791030 module=plugin
+2023-01-02T09:27:25Z DBG block height increasing module=plugin
 ```
 $ node_is_alived
-2022-09-14T08:36:29+02:00 INF Register module=grpc
-2022-09-14T08:36:29+02:00 INF Start 0.0.0.0 9098 module=sdk
-2022-09-14T08:36:29+02:00 INF Start module=grpc
-2022-09-14T08:36:29+02:00 INF Execute module=grpc
-2022-09-14T08:36:29+02:00 INF gaiad Process alive process=up
+```
+2023-01-02T09:26:47Z INF Register module=grpc
+2023-01-02T09:26:47Z INF Start 127.0.0.1 9098 module=sdk
+2023-01-02T09:26:47Z INF Start module=grpc
+2023-01-02T09:26:56Z INF Execute module=grpc
+2023-01-02T09:26:56Z INF HEALTHY process=up
+2023-01-02T09:27:25Z INF Execute module=grpc
+2023-01-02T09:27:25Z INF HEALTHY process=up
 ```
 ```
 $ node_peer_count
-2022-09-28T09:21:22Z INF Register module=grpc
-2022-09-28T09:21:22Z INF Start 127.0.0.1 9095 module=sdk
-2022-09-28T09:21:22Z INF Start module=grpc
-2022-09-28T09:21:32Z INF Execute module=grpc
-2022-09-28T09:21:32Z INF [cosmos-mainnet-sentry2-do]Good: peer_count is 56 moudle=plugin
+2023-01-02T09:26:47Z INF Register module=grpc
+2023-01-02T09:26:47Z INF Start 127.0.0.1 9091 module=sdk
+2023-01-02T09:26:47Z INF Start module=grpc
+2023-01-02T09:26:56Z INF Execute module=grpc
+2023-01-02T09:26:56Z INF Good: peer_count is 10 moudle=plugin
+2023-01-02T09:27:25Z INF Execute module=grpc
+2023-01-02T09:27:25Z INF Good: peer_count is 10 moudle=plugin
 ```
 ```
 $ node_active_status -valoperAddr <VALIDATOR_OPERATOR_ADDRESS>
-2022-10-26T11:42:35+02:00 INF Register module=grpc
-2022-10-26T11:42:35+02:00 INF Start 127.0.0.1 9100 module=sdk
-2022-10-26T11:42:35+02:00 INF Start module=grpc
-2022-10-26T11:42:42+02:00 INF Execute module=grpc
-2022-10-26T11:42:42+02:00 DBG Validator bonded. included active set module=plugin
+2023-01-02T09:26:47Z INF Register module=grpc
+2023-01-02T09:26:47Z INF Start 127.0.0.1 9100 module=sdk
+2023-01-02T09:26:47Z INF Start module=grpc
+2023-01-02T09:26:56Z INF Execute module=grpc
+2023-01-02T09:26:56Z DBG Validator bonded. included active set module=plugin
+2023-01-02T09:27:25Z INF Execute module=grpc
+2023-01-02T09:27:26Z DBG Validator bonded. included active set module=plugin
 ```
 ```
 # Your node have to enable API configuration ({HOME_DIR}/config/app.toml)
-$ node_governance_alarm -port 9093 -apiPort <API server port{default is 1317}> -voterAddr <Account Address>
-Lastest proposal is #195 module=plugin
-2022-12-23T07:52:52Z INF Proposal #N: Dit not vote module=plugin
-2022-12-23T07:52:52Z INF Register module=grpc
-2022-12-23T07:52:52Z INF Start 127.0.0.1 9093 module=sdk
-2022-12-23T07:52:52Z INF Start module=grpc
-2022-12-23T07:53:15Z INF Execute module=grpc
-2022-12-23T07:53:15Z DBG DEBUG : tmp == proposalId module=plugin
-2022-12-23T07:53:15Z INF Proposal #N: Dit not vote module=plugin
+$ node_governance_alarm -port 9097 -apiPort <API server port{default is 1317}> -voterAddr <Account Address>
+2023-01-02T09:27:32Z INF Register module=grpc
+2023-01-02T09:27:32Z INF Start 127.0.0.1 9097 module=sdk
+2023-01-02T09:27:32Z INF Start module=grpc
+2023-01-02T09:27:55Z INF Execute module=grpc
+2023-01-02T09:28:04Z DBG DEBUG : tmp == proposalId module=plugin
+2023-01-02T09:28:04Z INF Lastest proposal is #2
+ module=plugin
+2023-01-02T09:28:25Z INF Execute module=grpc
+2023-01-02T09:28:26Z DBG DEBUG : tmp == proposalId module=plugin
+2023-01-02T09:28:26Z INF Lastest proposal is #2
+ module=plugin
 ```
 ## Command line arguments
 - node_block_sync
@@ -132,6 +139,8 @@ Usage of node_is_alived:
     	IP Address(e.g. 0.0.0.0, 127.0.0.1) (default "127.0.0.1")
   -port int
     	Port number, default 9098 (default 9098)
+  -rpcAddr string
+    	RPC addrest:port (e.g. http://127.0.0.1:26667) (default "http://localhost:26657")
 ```
 - node_peer_count
 ```
@@ -142,6 +151,8 @@ Usage of node_peer_count:
         minimum peer count, default 5 (default 5)
   -port int
         Port number, default 9091 (default 9091)
+  -rpcAddr string
+    	RPC Address, default http://localhost:26657 (default "https://localhost:26657")
 ```
 - node_active_status
 ```
