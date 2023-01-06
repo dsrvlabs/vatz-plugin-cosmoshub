@@ -60,10 +60,9 @@ $ vatz plugin list
 ```
 
 ### Run
-> Run as default config
+> Run as default config or option flags
 ```
 $ node_block_sync
-```
 2023-01-02T09:26:47Z INF Register module=grpc
 2023-01-02T09:26:47Z INF Start 127.0.0.1 9091 module=sdk
 2023-01-02T09:26:47Z INF Start module=grpc
@@ -74,8 +73,8 @@ $ node_block_sync
 2023-01-02T09:27:25Z INF previous block height: 3791025, latest block height: 3791030 module=plugin
 2023-01-02T09:27:25Z DBG block height increasing module=plugin
 ```
-$ node_is_alived
 ```
+$ node_is_alived
 2023-01-02T09:26:47Z INF Register module=grpc
 2023-01-02T09:26:47Z INF Start 127.0.0.1 9098 module=sdk
 2023-01-02T09:26:47Z INF Start module=grpc
