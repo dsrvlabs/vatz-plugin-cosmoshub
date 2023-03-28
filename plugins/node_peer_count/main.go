@@ -15,10 +15,10 @@ import (
 
 const (
 	// Default values.
-	defaultAddr = "127.0.0.1"
-	defaultPort = 9091
-	defaultPeer = 5
-	defaultRpcAddr = "https://localhost:26657"
+	defaultAddr    = "127.0.0.1"
+	defaultPort    = 9091
+	defaultPeer    = 5
+	defaultRpcAddr = "http://localhost:26657"
 
 	pluginName = "cosmoshub-peer-count"
 )
