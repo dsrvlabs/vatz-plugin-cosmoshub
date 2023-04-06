@@ -179,3 +179,11 @@ Usage of node_governance_alarm:
   -voterAddr string
     	Need to voter address (default "address")
 ```
+
+## TroubleShooting
+1. Encountered issue related with `Device or Resource Busy` or `Too many open files` error.
+ - Check your open file limit and recommended to increase it.
+ ```
+ $ ulimit -n
+ 1000000
+ ```
