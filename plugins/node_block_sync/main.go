@@ -15,21 +15,21 @@ import (
 
 const (
 	// Default values.
-	defaultRPCAddr = "http://localhost:26657"
-	defaultAddr    = "127.0.0.1"
-	defaultPort    = 9091
-	pluginName     = "cosmoshub-block-sync"
+	defaultRPCAddr       = "http://localhost:26657"
+	defaultAddr          = "127.0.0.1"
+	defaultPort          = 10001
+	pluginName           = "cosmoshub-block-sync"
 	defaultCriticalCount = 3
 )
 
 var (
-	rpcAddr		string
-	addr		string
-	port		int
-	prevHeight	int
-	latestHeight	int
-	warningCount	int
-	criticalCount   int
+	rpcAddr       string
+	addr          string
+	port          int
+	prevHeight    int
+	latestHeight  int
+	warningCount  int
+	criticalCount int
 )
 
 func init() {

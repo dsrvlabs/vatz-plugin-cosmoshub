@@ -17,7 +17,7 @@ import (
 const (
 	// Default values.
 	defaultAddr       = "127.0.0.1"
-	defaultPort       = 9091
+	defaultPort       = 10005
 	defaultPeer       = 5
 	defaultApiPort    = 1317
 	defaultProposalId = 0

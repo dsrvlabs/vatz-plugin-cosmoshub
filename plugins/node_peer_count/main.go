@@ -16,7 +16,7 @@ import (
 const (
 	// Default values.
 	defaultAddr    = "127.0.0.1"
-	defaultPort    = 9091
+	defaultPort    = 10003
 	defaultPeer    = 5
 	defaultRpcAddr = "http://localhost:26657"
 
