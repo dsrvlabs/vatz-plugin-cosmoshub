@@ -38,7 +38,7 @@ var (
 
 func init() {
 	flag.StringVar(&addr, "addr", defaultAddr, "IP Address(e.g. 0.0.0.0, 127.0.0.1)")
-	flag.IntVar(&port, "port", defaultPort, "Port number, default 9091")
+	flag.IntVar(&port, "port", defaultPort, "Port number")
 	flag.UintVar(&apiPort, "apiPort", defaultApiPort, "Need to know proposal id")
 	flag.UintVar(&proposalId, "proposalId", defaultProposalId, "Need to know last proposal id")
 	flag.StringVar(&voterAddr, "voterAddr", defaultVoterVote, "Need to voter address")
