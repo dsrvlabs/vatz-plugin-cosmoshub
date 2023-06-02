@@ -16,7 +16,7 @@ import (
 const (
 	// Default values.
 	defaultAddr    = "127.0.0.1"
-	defaultPort    = 9091
+	defaultPort    = 10003
 	defaultPeer    = 5
 	defaultRpcAddr = "http://localhost:26657"
 
@@ -32,7 +32,7 @@ var (
 
 func init() {
 	flag.StringVar(&addr, "addr", defaultAddr, "IP Address(e.g. 0.0.0.0, 127.0.0.1)")
-	flag.IntVar(&port, "port", defaultPort, "Port number, default 9091")
+	flag.IntVar(&port, "port", defaultPort, "Port number")
 	flag.IntVar(&minPeer, "minPeer", defaultPeer, "minimum peer count, default 5")
 	flag.StringVar(&rpcAddr, "rpcAddr", defaultRpcAddr, "RPC Address, default http://localhost:26657")
 

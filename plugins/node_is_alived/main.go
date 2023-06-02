@@ -14,7 +14,7 @@ import (
 
 const (
 	defaultAddr    = "127.0.0.1"
-	defaultPort    = 9098
+	defaultPort    = 10002
 	defaultRPCAddr = "http://localhost:26657"
 )
 

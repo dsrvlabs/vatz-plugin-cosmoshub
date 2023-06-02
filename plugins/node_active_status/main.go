@@ -16,7 +16,7 @@ const (
 	// Default values.
 	defaultRPCAddr = "http://localhost:1317"
 	defaultAddr    = "127.0.0.1"
-	defaultPort    = 9100
+	defaultPort    = 10004
 	pluginName     = "cosmoshub-active-status"
 )
 
