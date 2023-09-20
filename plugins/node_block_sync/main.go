@@ -60,7 +60,7 @@ func pluginFeature(info, option map[string]*structpb.Value) (sdk.CallResponse, e
 	status, err := rpcCosmos.GetStatus(rpcAddr)
 
 	if err == nil {
-		latestHeight, _ = strconv.Atoi(status.Result.SyncInfo.LatestBlockHeight)
+		latestHeight, _ = strconv.Atoi(status.SyncInfo.LatestBlockHeight)
 		log.Info().Str("module", "plugin").Msgf("previous block height: %d, latest block height: %d", prevHeight, latestHeight)
 		state = pluginpb.STATE_SUCCESS
 
