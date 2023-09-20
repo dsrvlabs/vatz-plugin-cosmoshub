@@ -109,5 +109,5 @@ func GetNpeers(rpcAddr string) (string, error) {
 		return err.Error(), err
 	}
 
-	return info.Result.NPeers, nil
+	return info.NPeers, nil
 }
