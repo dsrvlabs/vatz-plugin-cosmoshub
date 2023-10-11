@@ -77,11 +77,10 @@ func pluginFeature(info, option map[string]*structpb.Value) (sdk.CallResponse, e
 	}
 
 	ret := sdk.CallResponse{
-		FuncName:   info["execute_method"].GetStringValue(),
-		Message:    msg,
-		Severity:   severity,
-		State:      state,
-		AlertTypes: []pluginpb.ALERT_TYPE{pluginpb.ALERT_TYPE_DISCORD},
+		FuncName: info["execute_method"].GetStringValue(),
+		Message:  msg,
+		Severity: severity,
+		State:    state,
 	}
 
 	return ret, nil

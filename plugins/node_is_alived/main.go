@@ -59,11 +59,10 @@ func pluginFeature(info, option map[string]*structpb.Value) (sdk.CallResponse, e
 		log.Error().Str("GetHealth", "Error").Msg(fmt.Sprintf("%v", err))
 		contentMSG := "UNHEALTHY"
 		return sdk.CallResponse{
-			FuncName:   "GetHealth",
-			Message:    contentMSG,
-			Severity:   pluginpb.SEVERITY_CRITICAL,
-			State:      pluginpb.STATE_FAILURE,
-			AlertTypes: []pluginpb.ALERT_TYPE{pluginpb.ALERT_TYPE_DISCORD},
+			FuncName: "GetHealth",
+			Message:  contentMSG,
+			Severity: pluginpb.SEVERITY_CRITICAL,
+			State:    pluginpb.STATE_FAILURE,
 		}, nil
 	}
 
@@ -81,11 +80,10 @@ func pluginFeature(info, option map[string]*structpb.Value) (sdk.CallResponse, e
 	}
 
 	ret := sdk.CallResponse{
-		FuncName:   "GetHealth",
-		Message:    contentMSG,
-		Severity:   severity,
-		State:      state,
-		AlertTypes: []pluginpb.ALERT_TYPE{pluginpb.ALERT_TYPE_DISCORD},
+		FuncName: "GetHealth",
+		Message:  contentMSG,
+		Severity: severity,
+		State:    state,
 	}
 	return ret, nil
 }
