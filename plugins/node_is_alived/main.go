@@ -4,6 +4,9 @@ import (
 	"flag"
 	"fmt"
 
+	"net/http"
+	_ "net/http/pprof"
+
 	health "github.com/dsrvlabs/vatz-plugin-cosmoshub/rpc/cosmos"
 	pluginpb "github.com/dsrvlabs/vatz-proto/plugin/v1"
 	"github.com/dsrvlabs/vatz/sdk"
@@ -49,6 +52,11 @@ func main() {
 	if err := p.Start(ctx, addr, port); err != nil {
 		fmt.Println("exit")
 	}
+
+	go func() {
+		fmt.Println(http.ListenAndServe("localhost:6060", nil))
+	}()
+
 }
 
 func pluginFeature(info, option map[string]*structpb.Value) (sdk.CallResponse, error) {
