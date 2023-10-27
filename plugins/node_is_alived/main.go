@@ -39,6 +39,10 @@ type HealthResult struct {
 }
 
 func main() {
+	go func() {
+		fmt.Println(http.ListenAndServe("localhost:6061", nil))
+	}()
+
 	flag.StringVar(&addr, "addr", defaultAddr, "IP Address(e.g. 0.0.0.0, 127.0.0.1)")
 	flag.IntVar(&port, "port", defaultPort, "Port number")
 	flag.StringVar(&rpcAddr, "rpcAddr", defaultRPCAddr, "RPC addrest:port (e.g. http://127.0.0.1:26667)")
@@ -52,10 +56,6 @@ func main() {
 	if err := p.Start(ctx, addr, port); err != nil {
 		fmt.Println("exit")
 	}
-
-	go func() {
-		fmt.Println(http.ListenAndServe("localhost:6060", nil))
-	}()
 
 }
 
