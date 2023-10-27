@@ -4,6 +4,9 @@ import (
 	"flag"
 	"fmt"
 
+	"net/http"
+	_ "net/http/pprof"
+
 	health "github.com/dsrvlabs/vatz-plugin-cosmoshub/rpc/cosmos"
 	pluginpb "github.com/dsrvlabs/vatz-proto/plugin/v1"
 	"github.com/dsrvlabs/vatz/sdk"
@@ -36,6 +39,10 @@ type HealthResult struct {
 }
 
 func main() {
+	go func() {
+		fmt.Println(http.ListenAndServe("localhost:6061", nil))
+	}()
+
 	flag.StringVar(&addr, "addr", defaultAddr, "IP Address(e.g. 0.0.0.0, 127.0.0.1)")
 	flag.IntVar(&port, "port", defaultPort, "Port number")
 	flag.StringVar(&rpcAddr, "rpcAddr", defaultRPCAddr, "RPC addrest:port (e.g. http://127.0.0.1:26667)")
