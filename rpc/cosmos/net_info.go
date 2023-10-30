@@ -102,6 +102,8 @@ func GetNpeers(rpcAddr string) (string, error) {
 		return strconv.Itoa(resp.StatusCode), fmt.Errorf("request failed %s", string(rawBody))
 	}
 
+	defer resp.Body.Close()
+
 	info := netInfo{}
 	err = json.Unmarshal(rawBody, &info)
 

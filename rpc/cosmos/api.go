@@ -74,6 +74,8 @@ func GetStatus(rpcAddr string) (*Status, error) {
 		return nil, fmt.Errorf("request failed %s", string(rawBody))
 	}
 
+	defer resp.Body.Close()
+
 	status, err := parseRawStatus(rawBody)
 	if err != nil {
 		return nil, err

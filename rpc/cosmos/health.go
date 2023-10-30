@@ -22,5 +22,8 @@ func GetHealth(rpcAddr string) (int, error) {
 		log.Error().Str("Response", "Error").Msg(fmt.Sprintf("%v", err))
 		return -1, err
 	}
+
+	defer resp.Body.Close()
+
 	return resp.StatusCode, nil
 }
