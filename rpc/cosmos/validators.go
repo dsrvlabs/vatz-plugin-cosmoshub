@@ -73,6 +73,8 @@ func GetBondStatus(rpcAddr string, valoperAddr string) (bool, error) {
 		return false, fmt.Errorf("request failed %d %s", resp.StatusCode, string(rawBody))
 	}
 
+	defer resp.Body.Close()
+
 	status := validatorStatus{}
 	err = json.Unmarshal(rawBody, &status)
 
